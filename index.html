@@ -1,0 +1,1378 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FreeSpace – Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            scroll-behavior: smooth
+        }
+
+        .topbtn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--panel);
+            color: var(--text);
+            text-decoration: none
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+    <!-- Mobile Topbar -->
+    <header class="md:hidden sticky top-0 z-30 bg-white border-b border-slate-200">
+        <div class="flex items-center justify-between px-4 py-3">
+            <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span>
+                <span class="font-extrabold tracking-wide">FreeSpace Docs</span>
+            </div>
+            <button id="menuBtn"
+                class="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-3 py-1.5 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                Menu
+            </button>
+        </div>
+    </header>
+
+    <div class="md:grid md:grid-cols-[16rem_1fr] min-h-screen">
+        <!-- Scrim -->
+        <div id="scrim" class="fixed inset-0 z-40 bg-black/40 hidden md:hidden"></div>
+
+        <!-- Sidebar / Drawer -->
+        <aside id="drawer"
+            class="fixed md:sticky md:top-0 md:self-start inset-y-0 left-0 z-50 w-72 md:w-full
+         bg-white border-r border-slate-200 shadow-xl md:shadow-none
+         transform -translate-x-full md:translate-x-0 transition-transform
+         md:max-h-screen md:overflow-y-auto p-4">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-orange-500"></div>
+                    <h1 class="font-extrabold tracking-wide">FreeSpace Docs</h1>
+                </div>
+                <button id="closeBtn"
+                    class="md:hidden rounded-lg border border-slate-300 px-2 py-1 text-sm">Close</button>
+            </div>
+
+            <!-- GETTING STARTED -->
+            <h3 class="text-[11px] font-semibold text-blue-700 tracking-wider mt-6 mb-2">GETTING STARTED</h3>
+            <ul class="space-y-1">
+                <li><a class="navlink block px-3 py-2 rounded hover:bg-blue-50" href="#intro">• Introduction</a></li>
+                <li><a class="navlink block px-3 py-2 rounded hover:bg-blue-50" href="#dev-practices">• Development
+                        Practices</a>
+                </li>
+                <li><a class="navlink block px-3 py-2 rounded hover:bg-blue-50" href="#key-features">• Key Features</a>
+                </li>
+                <li><a class="navlink block px-3 py-2 rounded hover:bg-blue-50" href="#folder-structure">• Folder
+                        Structure</a></li>
+                <li><a class="navlink block px-3 py-2 rounded hover:bg-blue-50" href="#system-reqs">• System
+                        Requirements</a></li>
+                <li><a class="navlink block px-3 py-2 rounded hover:bg-blue-50" href="#how-it-works">• How System
+                        Work</a></li>
+            </ul>
+
+            <!-- APP FEATURES with submenu -->
+            <h3 class="text-[11px] font-semibold text-blue-700 tracking-wider mt-6 mb-2">APP FEATURES</h3>
+            <ul class="space-y-1 ml-1">
+                <li><a class="navlink block pl-5 px-3 py-2 rounded hover:bg-blue-50" href="#feat-customer">• Web –
+                        Customer</a></li>
+                <li><a class="navlink block pl-5 px-3 py-2 rounded hover:bg-blue-50" href="#feat-shopowner">• Web – Shop
+                        Owner</a></li>
+                <li><a class="navlink block pl-5 px-3 py-2 rounded hover:bg-blue-50" href="#feat-admin">• Admin</a></li>
+                <li><a class="navlink block pl-5 px-3 py-2 rounded hover:bg-blue-50" href="#feat-api">• API</a></li>
+            </ul>
+
+            <!-- HOW TO INSTALL -->
+            <h3 class="text-[11px] font-semibold text-blue-700 tracking-wider mt-6 mb-2">HOW TO INSTALL</h3>
+            <ul class="space-y-1">
+                <li><a class="navlink block px-3 py-2 rounded hover:bg-blue-50" href="#install">• Installation On
+                        Server</a>
+                </li>
+                <li><a class="navlink block px-3 py-2 rounded hover:bg-blue-50" href="#docker">• Run with Docker</a>
+                </li>
+                <li><a class="navlink block px-3 py-2 rounded hover:bg-blue-50" href="#k8s">• Run on Kubernetes</a></li>
+                <li><a class="navlink block px-3 py-2 rounded hover:bg-blue-50" href="#cpanel">• Installation On
+                        cPanel</a>
+                </li>
+                <li><a class="navlink block px-3 py-2 rounded hover:bg-blue-50" href="#local">• Run on Local</a>
+                </li>
+            </ul>
+
+            <!-- CREDENTIALS -->
+            <h3 class="text-[11px] font-semibold text-blue-700 tracking-wider mt-6 mb-2">CREDENTIALS</h3>
+            <ul class="space-y-1">
+                <li><a class="navlink block px-3 py-2 rounded hover:bg-blue-50" href="#credentials">• Demo Accounts</a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main -->
+        <main class="p-4 md:p-8 space-y-10">
+            <!-- Introduction -->
+            <section id="intro"
+              class="scroll-mt-24 md:scroll-mt-6 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+
+              <div class="grid md:grid-cols-2 gap-6 items-start">
+                <!-- Left: text -->
+                <div>
+                  <h2 class="text-3xl font-bold text-orange-600">Introduction</h2>
+                  <p class="text-slate-700">
+                    <strong>FreeSpace</strong> lets shops monetize their <em>idle space</em> with
+                    <strong>by-the-minute</strong> rentals. Customers scan a QR to start/stop usage—
+                    no counter, no paperwork.
+                  </p>
+
+                  <h3 class="text-lg font-semibold mt-4">The idea in a nutshell</h3>
+                  <p class="text-slate-700">
+                    Many stores, supermarkets and offices have unused corners that sit empty.
+                    FreeSpace connects those spaces with customers. A Shop Owner sets a per-minute rate;
+                    customers scan a QR and pay only for the minutes they use. The platform takes an admin
+                    commission on each bill so the business model is built-in.
+                  </p>
+
+                  <h3 class="text-lg font-semibold mt-4">How it works</h3>
+                  <ol class="list-decimal ml-6 space-y-1 text-slate-700">
+                    <li>Users register and get their personal <strong>QR card</strong>.</li>
+                    <li>At any registered shop, <strong>scan to start</strong> the timer.</li>
+                    <li>When finished, <strong>scan again to stop</strong>; pay instantly or keep as due.</li>
+                  </ol>
+
+                  <h3 class="text-lg font-semibold mt-4">Pricing example</h3>
+                  <p class="text-slate-700">
+                    Per-minute rate = <strong>10 BDT</strong>, usage = <strong>20 minutes</strong> → total <strong>200 BDT</strong>.<br>
+                    With a <strong>10% admin fee</strong>, <strong>Admin gets 20 BDT</strong> and the
+                    <strong>Shop Owner gets 180 BDT</strong>.
+                  </p>
+
+                  <h3 class="text-lg font-semibold mt-4">Why it’s great (and why buy)</h3>
+                  <ul class="list-disc ml-6 space-y-2 text-slate-700">
+                    <li><strong>SaaS-ready product:</strong> Complete frontend, backend and REST API — deploy or rebrand for commercial use (CodeCanyon-friendly).</li>
+                    <li><strong>Proven business model:</strong> Per-minute pricing + built-in commission/settlement workflow.</li>
+                    <li><strong>Real-time experience:</strong> Live start/stop and notifications via <em>Laravel Reverb</em> & Laravel notifications table.</li>
+                    <li><strong>Role-based access:</strong> Customer, Shop Owner, Admin, Super Admin using <em>spatie/laravel-permission</em>.</li>
+                    <li><strong>Developer-friendly:</strong> Service-layer architecture, DI, clean routes, Form Requests & API Resources.</li>
+                    <li><strong>Mobile/SPA ready:</strong> All endpoints documented with <em>Scribe</em> — easy to ship native apps or a separate SPA later.</li>
+                    <li><strong>Ops-ready:</strong> Docker & Kubernetes files, .env examples, and clear docs to get running fast.</li>
+                    <li><strong>Stripe:</strong> Stripe Payment getway setup. [webhook setup]</li>
+                  </ul>
+
+                  <h3 class="text-lg font-semibold mt-4">Under the hood</h3>
+                  <p class="text-slate-700">
+                    Built with <strong>Laravel&nbsp;12</strong>, <strong>Inertia.js + Vue.js</strong>,
+                    realtime via <strong>Laravel Reverb</strong>, roles/permissions by
+                    <strong>spatie/laravel-permission</strong>, notifications using Laravel’s
+                    <code class="bg-slate-100 px-1 rounded">notifications</code> table, and
+                    <strong>MySQL</strong> as the database. REST APIs are documented with
+                    <strong>Scribe</strong> so you can plug in a mobile app or SPA anytime.
+                  </p>
+                </div>
+
+                <!-- Right: image -->
+                <figure class="order-first md:order-last border border-slate-200 rounded-xl p-4 bg-slate-50">
+                  <!-- Replace the src with your real asset -->
+                  <img src="assets/quick-point.jpg" alt="FreeSpace QR-based by-the-minute renting"
+                      class="mx-auto w-full h-auto object-contain">
+                  <figcaption class="mt-2 text-sm text-slate-600 text-center">
+                    Scan → Use → Stop → Pay — the FreeSpace flow
+                  </figcaption>
+                </figure>
+              </div>
+            </section>
+
+            <!-- Dev Partices -->
+            <div id="dev-practices" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                <h2 class="text-3xl font-bold text-orange-600">Development Practices</h2>
+                <p class="text-slate-700">
+                    The codebase is organized so developers can change or extend features quickly and safely.
+                    Frontend pieces are split into small, reusable components, and the backend business logic
+                    lives in clear <strong>Service</strong> classes with <strong>Dependency Injection (DI)</strong>.
+                </p>
+
+                <h3 class="text-lg font-semibold mt-4">Structure & Patterns</h3>
+                <ul class="list-disc ml-6 space-y-1 text-slate-700">
+                    <li><strong>Component-wise UI:</strong> Small, focused Vue components for easier reuse and testing.
+                    </li>
+                    <li><strong>Service layer:</strong> All business rules are implemented in Service classes, keeping
+                        controllers thin.</li>
+                    <li><strong>DI everywhere:</strong> Services and dependencies are injected, making code easier to
+                        swap or mock.</li>
+                </ul>
+
+                <h3 class="text-lg font-semibold mt-4">Routes by Context</h3>
+                <p class="text-slate-700">Routes are split into small files by role to stay tidy and readable:</p>
+                <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto">
+                    <code>
+                    routes/
+                    ├─ admin.php        # all admin routes
+                    ├─ auth.php         # all auth routes
+                    ├─ api.php          # all api routes
+                    ├─ channels.php     # all channels routes
+                    ├─ console.php      # all console routes
+                    ├─ customer.php     # all customer routes
+                    ├─ shop_owner.php   # all shop-owner routes
+                    └─ common.php       # shared/common routes
+                    </code>
+                </pre>
+
+                <h3 class="text-lg font-semibold mt-4">Requests & Resources</h3>
+                <ul class="list-disc ml-6 space-y-1 text-slate-700">
+                    <li><strong>Form Request</strong> classes handle validation per endpoint/method.</li>
+                    <li><strong>API Resource</strong> classes shape clean, consistent JSON responses.</li>
+                </ul>
+
+                <p class="text-slate-700 mt-4">
+                    With this setup, any developer can quickly adjust existing behavior or add new business logic
+                    without breaking other parts of the app.
+                </p>
+            </div>
+
+
+            <!-- Key Features -->
+            <section id="key-features"
+            class="scroll-mt-24 md:scroll-mt-6 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+            <h2 class="text-2xl font-bold text-orange-600">Key Features</h2>
+
+            <ul class="mt-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-slate-700">
+              <!-- Core product -->
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">QR scan to start/stop usage timer</li>
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Per-minute pricing with admin commission</li>
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Realtime notifications (Laravel Reverb)</li>
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Spatie Roles & Permissions (Customer / Shop Owner / Admin / Super Admin)</li>
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Reports & dashboards (payments, usage, settlements)</li>
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Settlement workflow: Unsettled / Hold / Cancel / Settled</li>
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Campaigns & notifications center</li>
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Nearby shops, transactions history, profile</li>
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">QR print/download (Customer & Shop Owner)</li>
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Pay now or keep as Due flow</li>
+
+              <!-- API & Dev experience -->
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Full REST API documented with <strong>Scribe</strong> (<code>/docs</code>)</li>
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Service-layer architecture, DI, Form Requests & API Resources</li>
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Routes split by context (admin, auth, api, channels, console, customer, shop_owner, common)</li>
+
+              <!-- Ops/Infra -->
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Dockerized app: Dockerfile + <code>docker-compose.yml</code> (dev & prod)</li>
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Kubernetes manifests (<code>k8s/</code>) for cluster deploy</li>
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Environment templates: <code>.env.example</code>, <code>.env.docker</code>, <code>.env.production</code></li>
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Nginx/PHP-FPM config samples (<code>config/</code>)</li>
+
+              <!-- Ready-to-test -->
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">Demo accounts included for quick testing</li>
+              <li class="bg-slate-50 border border-slate-200 rounded-xl p-3">MySQL-backed data model, ready for scale</li>
+            </ul>
+          </section>
+
+
+            <!-- Folder Structure -->
+            <section id="folder-structure"
+                class="scroll-mt-24 md:scroll-mt-6 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <h2 class="text-2xl font-bold text-orange-600">App Folder Structure</h2>
+                <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto mt-3"><code>├─ free-space/                     # ← Laravel project root
+   ├─ app/                  # domain code (Models, Policies, Services…)
+   ├─ bootstrap/
+   ├─ config/
+   ├─ database/             # migrations & seeders
+   ├─ public/
+   ├─ resources/            # Inertia/Vue pages & components
+   ├─ routes/               # api.php, web.php (plus split route files)
+   ├─ storage/
+   ├─ tests/
+   ├─ vendor/
+   ├─ .env                  # app env (local/prod copy lives here)
+   ├─ .env.example
+   ├─ artisan
+   ├─ composer.json
+   ├─ composer.lock
+   ├─ package.json
+   ├─ package-lock.json
+   ├─ phpunit.xml
+   └─ vite.config.js</code></pre> <br>
+
+<h2 class="text-2xl font-bold text-orange-600">dockerize-k8s Structure</h2>
+                <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto mt-3"><code>project/
+├─ .docker/                 # docker helpers, nginx conf, etc.
+├─ k8s/                     # Kubernetes manifests
+├─ config/                  # ops config (nginx, php ect)
+│
+├─ app/..                   # ← Laravel project root
+├─ .dockerignore
+├─ .env.docker              # env for docker compose
+├─ .env.production          # prod overrides (copied into app/.env in CI)
+├─ docker-compose.yml
+├─ docker-compose.prod.yml
+├─ Dockerfile               # build web/phpp-fpm image
+└─ run-command.txt          # helper commands</code></pre>
+            </section>
+
+            <!-- System Requirements -->
+            <section id="system-reqs"
+                class="scroll-mt-24 md:scroll-mt-6 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <h2 class="text-2xl font-bold text-orange-600">System Requirements</h2>
+                <ul class="list-disc ml-6 mt-2 text-slate-700">
+                    <li>PHP 8.3+, Composer</li>
+                    <li>MySQL 8+</li>
+                    <li>Node 20+, npm</li>
+                    <li>Web server (Nginx/Apache) pointing to <code class="bg-slate-100 px-1 rounded">/public</code>
+                    </li>
+                    <li>Open ports for Reverb/WebSocket (e.g., 8081) or reverse proxy</li>
+                </ul>
+            </section>
+
+            <!-- How System Wrok -->
+            <section id="how-it-works" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                <h2 class="text-3xl font-bold text-orange-600">How It Works</h2>
+                <p class="text-slate-700">
+                    FreeSpace is simple: scan a QR, pick a space, and pay only for the minutes you use.
+                    Below are two quick flows—one from the Shop Owner side and one from the Customer side.
+                </p>
+
+                <!-- Sample QR Codes -->
+                <h3 class="text-lg font-semibold mt-4">Sample QR Codes</h3>
+                <div class="grid sm:grid-cols-2 gap-6 mt-2">
+                    <figure class="border border-slate-200 rounded-xl p-4 text-center">
+                        <img src="assets/customer_Qr_Code.png" alt="Customer QR code (sample)"
+                            class="mx-auto w-80 h-80 object-contain" />
+                        <figcaption class="mt-2 text-sm text-slate-600">Customer QR — sample</figcaption>
+                    </figure>
+
+                    <figure class="border border-slate-200 rounded-xl p-4 text-center">
+                        <img src="assets/ShopOwner_Qr_Code.png" alt="Shop Owner QR code (sample)"
+                            class="mx-auto w-80 h-80 object-contain" />
+                        <figcaption class="mt-2 text-sm text-slate-600">Shop Owner QR — sample</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Shop Owner Flow -->
+                <h3 class="text-lg font-semibold mt-6">Shop Owner Flow</h3>
+                <ol class="list-decimal ml-6 space-y-1 text-slate-700">
+                    <li>Print or save the <strong>Customer’s QR code</strong> (or sign in as that customer and get their
+                        QR).</li>
+                    <li>Go to any registered shop; Open <strong>Shop Owner’s Web Cam</strong>.</li>
+                    <li>Scan the <strong>customer’s QR</strong> with the camera.</li>
+                    <li>Select a space from the <strong>available list</strong> to start usage.</li>
+                </ol>
+
+                <!-- Customer Flow -->
+                <h3 class="text-lg font-semibold mt-4">Customer Flow</h3>
+                <ol class="list-decimal ml-6 space-y-1 text-slate-700">
+                    <li>Go to any registered shop; the welcome desk shows the <strong>Shop Owner’s QR</strong>.</li>
+                    <li>Sign in with your <strong>Customer</strong> account.</li>
+                    <li>Click <strong>“QR Scanner On”</strong> to start the webcam.</li>
+                    <li>Scan the <strong>Shop Owner’s QR</strong>.</li>
+                    <li>Pick a space to start the timer. Scan again to stop and see the cost.</li>
+                </ol>
+
+                <!-- Demo Logins -->
+                <h3 class="text-lg font-semibold mt-4">Demo Logins (for testing)</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="border border-slate-200 rounded-xl p-4">
+                        <h4 class="font-semibold mb-2">Shop Owners</h4>
+                        <p class="text-slate-700">
+                            <code>shopowner1@example.com</code> … <code>shopowner20@example.com</code><br>
+                            Password: <code>password</code> <span class="text-xs text-slate-500">(all lowercase)</span>
+                        </p>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl p-4">
+                        <h4 class="font-semibold mb-2">Customers</h4>
+                        <p class="text-slate-700">
+                            <code>customer1@example.com</code> … <code>customer30@example.com</code><br>
+                            Password: <code>password</code> <span class="text-xs text-slate-500">(all lowercase)</span>
+                        </p>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl p-4">
+                        <h4 class="font-semibold mb-2">Admin</h4>
+                        <p class="text-slate-700">
+                            Email: <code>admin@example.com</code><br>
+                            Password: <code>password</code>
+                        </p>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl p-4">
+                        <h4 class="font-semibold mb-2">Super Admin</h4>
+                        <p class="text-slate-700">
+                            Email: <code>superadmin@example.com</code><br>
+                            Password: <code>password</code>
+                        </p>
+                    </div>
+                </div>
+
+                <h3 class="font-semibold mt-4 font-bold text-green-600 text-xl mb-2">Video: How It Works</h3>
+                <div class="rounded-xl overflow-hidden border border-slate-200">
+                    <iframe
+                    class="w-full"
+                    style="aspect-ratio: 16 / 9"
+                    src="https://www.youtube.com/embed/YUd13JX8nLc?rel=0"
+                    title="How to deploy app on cPanel"
+                    frameborder="0"
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+                </div>
+
+                <div class="mt-4 text-sm text-slate-600 bg-slate-50 border border-slate-200 rounded-xl p-3">
+                    <strong>Note:</strong> Replace the sample accounts and QR images with real data in production.
+                </div>
+                <h3 class="font-semibold mt-4 font-bold text-green-600 text-xl mb-2">Video: App Overview</h3>
+                <div class="rounded-xl overflow-hidden border border-slate-200">
+                    <iframe
+                    class="w-full"
+                    style="aspect-ratio: 16 / 9"
+                    src="https://www.youtube.com/embed/YUd13JX8nLc?rel=0"
+                    title="How to deploy app on cPanel"
+                    frameborder="0"
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+                </div>
+            </section>
+
+
+
+            <!-- Features: Customer -->
+            <section id="feat-customer"
+                class="scroll-mt-24 md:scroll-mt-6 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <h2 class="text-2xl font-bold text-orange-600">App Features – Web (Customer)</h2>
+                <ul class="list-disc ml-6 mt-2 text-slate-700">
+                    <li>Dashboard with <em>QR Code Print/Download</em> and <em>QR Scanner</em> (webcam)</li>
+                    <li>Scan to start timer; scan again to stop</li>
+                    <li>Payment modal shows duration & total; can pay now or keep as <em>Due</em></li>
+                    <li>Nearby Shops, Transactions History, Profile</li>
+                </ul>
+            </section>
+
+            <!-- Features: Shop Owner -->
+            <section id="feat-shopowner"
+                class="scroll-mt-24 md:scroll-mt-6 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <h2 class="text-2xl font-bold text-orange-600">App Features – Web (Shop Owner)</h2>
+                <ul class="list-disc ml-6 mt-2 text-slate-700">
+                    <li>Dashboard with own QR (Print/Download) & Scanner</li>
+                    <li>Current Status: Spaces list & Today’s Due Bills</li>
+                    <li>Reports: Today & Current Month (filter by month)</li>
+                    <li>Payment Settlement: Unsettled summary (online vs cash) → <em>Request to Settle</em>; Monthly
+                        Settled</li>
+                    <li>Manage Spaces, Campaigns, Notifications, Profile</li>
+                </ul>
+            </section>
+
+            <!-- Features: Admin -->
+            <section id="feat-admin"
+                class="scroll-mt-24 md:scroll-mt-6 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <h2 class="text-2xl font-bold text-orange-600">App Features – Admin</h2>
+                <ul class="list-disc ml-6 mt-2 text-slate-700">
+                    <li>Dashboard charts: 30‑day Payment Summary, daily Space Usage, daily Settlement Status</li>
+                    <li>Reports: Today’s Transactions & Current Month (per Shop Owner)</li>
+                    <li>Payment Settlement tabs: Unsettled / Hold / Cancel / Settled</li>
+                    <li>Shops tabs: Requests / Active / De‑Active / Banned + Shop Types management</li>
+                    <li>Campaigns, Notifications, Profile</li>
+                </ul>
+            </section>
+
+            <!-- Features: API -->
+            <section id="feat-api"
+                class="scroll-mt-24 md:scroll-mt-6 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <h2 class="text-2xl font-bold text-orange-600">API Overview</h2>
+                <p class="text-slate-600">REST endpoints for Customers, Shops, Spaces, Campaigns, Transactions,
+                    Settlements, Notifications, and Auth. Auto‑generated with <strong>Scribe</strong> (commonly
+                    available at <code class="bg-slate-100 px-1 rounded">/docs</code> route).</p>
+                <figure class="border border-slate-200 rounded-xl p-4 text-center">
+                    <img src="assets/Api_docs.png" alt="Customer QR code (sample)" class="mx-auto object-contain" />
+                    <figcaption class="mt-2 text-sm text-slate-600">Customer QR — sample</figcaption>
+                </figure>
+            </section>
+
+
+
+<!-- Installation (Server) -->
+<section id="install" class="scroll-mt-24 md:scroll-mt-6 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+
+  <h2 class="text-3xl font-bold text-orange-600">Installation (Server)</h2>
+
+  <!-- 0. Quick checks -->
+  <h3 class="mt-4 font-bold text-green-600 text-xl mb-2">Check installed software</h3>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>nginx -v
+php -v
+mysql --version
+composer -V
+node -v
+npm -v
+git --version</code></pre>
+
+  <!-- 1. UFW -->
+  <h3 class="mt-4 font-bold text-green-600 text-xl mb-2">UFW configuration</h3>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>sudo apt update
+sudo apt upgrade
+
+sudo apt install ufw -y
+sudo ufw allow OpenSSH
+sudo ufw allow "Nginx Full"    # or: sudo ufw allow 80,443/tcp
+sudo ufw enable
+sudo ufw status verbose</code></pre>
+
+  <!-- 2. Required packages -->
+  <h3 class="mt-4 font-bold text-green-600 text-xl mb-2">Install required software (if missing)</h3>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>sudo apt update && sudo apt -y upgrade
+
+# Nginx
+sudo apt install -y nginx
+
+# MySQL Server
+sudo apt install -y mysql-server
+
+# PHP-FPM + MySQL extension (adjust version if needed)
+sudo apt install -y php-fpm php-mysql
+apt install -y php8.3-xml
+systemctl restart php8.3-fpm
+
+# Composer (if not present)
+sudo apt install -y composer</code></pre>
+  <p class="text-slate-600 text-sm mt-1"><span class="text-red-600">Notes:</span> <code>php-fpm</code> installs PHP + PHP-FPM; <code>php-mysql</code> enables MySQL support.</p>
+
+  <!-- 3. Node -->
+  <h3 class="mt-4 font-bold text-green-600 text-xl mb-2">Node & npm setup</h3>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code># 1. Install nvm (per user)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+
+# reload your shell (or open a new one), then:
+export NVM_DIR="$HOME/.nvm"
+. "$NVM_DIR/nvm.sh"
+
+# 2. Install & use the latest LTS
+nvm install --lts
+nvm use --lts
+
+# 3. Verify
+node -v
+npm -v
+
+
+###################################################################
+## Option B — System-wide (servers/CI) with NodeSource APT repo ###
+###################################################################
+
+# 1. Prereqs
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+
+# 2. Add NodeSource repo for the LTS MAJOR (22 as of now)
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
+  | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+NODE_MAJOR=22
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" \
+  | sudo tee /etc/apt/sources.list.d/nodesource.list
+
+# 3. Install Node.js
+sudo apt-get update
+sudo apt-get install -y nodejs
+
+# 4. Verify
+node -v
+npm -v</code></pre>
+
+  <!-- 4. Developer/system user -->
+  <h3 class="mt-4 font-bold text-green-600 text-xl mb-2">Create developer user (optional)</h3>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>sudo adduser developer
+sudo usermod -aG sudo developer
+
+cat /etc/passwd
+groups
+su - developer
+</code></pre>
+
+  <!-- 5. Database -->
+  <h3 class="mt-4 font-bold text-green-600 text-xl mb-2">Create database & user</h3>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>sudo mysql -u root
+
+CREATE DATABASE free_space;
+CREATE USER 'developer'@'localhost' IDENTIFIED BY 'password_here';
+GRANT ALL PRIVILEGES ON free_space.* TO 'developer'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+
+# test
+mysql -u developer -p -e "SHOW DATABASES;"</code></pre>
+
+  <!-- 6. Upload & place code -->
+   <h3 class="mt-4 font-bold text-green-600 text-xl mb-2">Upload project via Github</h3>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code># Go to .ssh folder
+cd .ssh
+ssh-keygen -t ed25519 -C "your_email@example.com"
+
+# copy id_ed25519.pub content
+cat id_ed25519.pub
+
+
+#Then go to your GitHub Project Link and add click "Settings" menu then click "Deploy Keys" Menu. 
+Click again "Add deploy key" button and paste the copied content.
+
+# Go to your terminal and run this command
+ssh -T git@github.com
+
+Note: it you see "You've successfully authenticated, but GitHub does not provide shell access." message then you are done.
+</code></pre>
+
+  <h3 class="mt-4 font-bold text-green-600 text-xl mb-2">Upload project and move into place</h3>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code># Example: upload folder 'free-space' to /var/www
+sudo mv free-space /var/www/free-space</code></pre>
+
+  <!-- 7. Nginx vhost -->
+  <h3 class="mt-4 font-bold text-green-600 text-xl mb-2">Nginx configuration</h3>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>cd /etc/nginx/sites-available
+sudo nano free-space</code></pre> <br>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>server {
+    listen 80;
+    listen [::]:80;
+    server_name your_domain.com www.your_domain.com;
+
+    root /var/www/free-space/public;
+    index index.php index.html;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;   # adjust PHP version if needed
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+    }
+}</code></pre> <br>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>sudo ln -s /etc/nginx/sites-available/free-space /etc/nginx/sites-enabled/free-space
+sudo nginx -t
+sudo systemctl reload nginx</code></pre>
+
+  <!-- 8. phpMyAdmin (optional) -->
+  <h3 class="mt-4 font-bold text-green-600 text-xl mb-2">phpMyAdmin (optional)</h3>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>sudo apt update
+sudo apt install -y phpmyadmin php-mbstring php-zip php-gd php-json php-curl
+
+# (optional) expose via your app domain path:
+sudo ln -s /usr/share/phpmyadmin /var/www/free-space/public/phpmyadmin
+
+### Or use  this blog in your nginx config file: ###
+# Serve phpMyAdmin under /phpmyadmin without touching your repo
+  location /phpmyadmin {
+      alias /usr/share/phpmyadmin;
+      index index.php;
+      try_files $uri $uri/ /phpmyadmin/index.php?$args;
+  }
+
+  # PHP handler for phpMyAdmin only
+  location ~ ^/phpmyadmin/(.+\.php)$ {
+      alias /usr/share/phpmyadmin/$1;
+      include fastcgi_params;
+      fastcgi_param SCRIPT_FILENAME /usr/share/phpmyadmin/$1;
+      fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+      fastcgi_intercept_errors on;
+  }
+</code></pre>
+
+  <!-- 9. App setup -->
+  <h3 class="mt-4 font-bold text-green-600 text-xl mb-2">Project setup</h3>
+  <ol class="list-decimal ml-6 text-slate-700 space-y-2">
+    <li>Copy env</li>
+  </ol>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>cd /var/www/free-space
+cp .env.example .env</code></pre>
+  <ol start="2" class="list-decimal ml-6 text-slate-700 space-y-2">
+    <li>Update database in <code>.env</code></li>
+  </ol>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=free_space
+DB_USERNAME=developer
+DB_PASSWORD=password_here</code></pre>
+  <ol start="3" class="list-decimal ml-6 text-slate-700 space-y-2">
+    <li>Install dependencies</li>
+  </ol>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>composer install --optimize-autoloader
+# production: composer install --optimize-autoloader --no-dev
+
+npm install
+npm run build</code></pre>
+  <ol start="4" class="list-decimal ml-6 text-slate-700 space-y-2">
+    <li>Generate app key & storage link</li>
+  </ol>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>php artisan key:generate
+php artisan storage:link</code></pre>
+
+  <!-- 10. Permissions -->
+  <h3 class="mt-4 font-bold text-green-600 text-xl mb-2">Set permissions</h3>
+  <ol class="list-decimal ml-6 text-slate-700 space-y-2">
+    <li>Set ownership</li>
+  </ol>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>sudo chown -R developer:www-data storage
+sudo chown -R developer:www-data storage bootstrap/cache</code></pre>
+  <ol start="2" class="list-decimal ml-6 text-slate-700 space-y-2">
+    <li>Add users to <code>www-data</code> group (if needed)</li>
+  </ol>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>sudo usermod -a -G www-data developer
+sudo usermod -a -G www-data nginx
+groups developer
+groups nginx</code></pre>
+  <ol start="3" class="list-decimal ml-6 text-slate-700 space-y-2">
+    <li>Directory/file modes</li>
+  </ol>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>sudo chmod -R 775 storage
+sudo chmod -R 775 storage bootstrap/cache</code></pre>
+
+  <!-- 11. Clear caches -->
+  <h3 class="mt-4 font-bold text-green-600 text-xl mb-2">Clear caches</h3>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>php artisan config:clear
+php artisan cache:clear
+php artisan route:clear</code></pre>
+
+  <!-- 12. Migrate/seed -->
+  <h3 class="mt-4 font-bold text-green-600 text-xl mb-2">Migrate database</h3>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>php artisan migrate
+# or
+php artisan migrate:refresh --seed</code></pre>
+
+  <!-- 13. Go live: SSL, Reverb, Queue, Cron -->
+  <h3 class="mt-6 font-bold text-orange-600 text-2xl mb-2">Go live: SSL, Reverb, Queue & Cron</h3>
+
+  <h4 class="mt-2 font-semibold text-green-600 text-xl mb-2">SSL with Certbot</h4>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>sudo apt install -y certbot python3-certbot-nginx
+sudo certbot --nginx -d your_domain.com -d www.your_domain.com
+sudo systemctl status certbot.timer
+
+# Auto renewal (dry run)
+sudo certbot renew --dry-run</code></pre>
+
+  <h4 class="mt-2 font-semibold text-green-600 text-xl mb-2">Reverb behind Nginx (WebSocket proxy)</h4>
+  <p class="text-slate-600"><span class="text-red-600 font-semibold">Note:</span> replace the domain with yours.</p>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>cd /etc/nginx/sites-available
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name your_domain.com www.your_domain.com.com;
+
+    ssl_certificate /etc/letsencrypt/live/your_domain.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/your_domain.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+    root /var/www/free-space/public;
+    index index.php index.html;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+
+
+    # Serve phpMyAdmin under /phpmyadmin without touching your repo
+    location /phpmyadmin {
+        alias /usr/share/phpmyadmin;
+        index index.php;
+        try_files $uri $uri/ /phpmyadmin/index.php?$args;
+    }
+
+    # PHP handler for phpMyAdmin only
+    location ~ ^/phpmyadmin/(.+\.php)$ {
+        alias /usr/share/phpmyadmin/$1;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME /usr/share/phpmyadmin/$1;
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+        fastcgi_intercept_errors on;
+    }
+
+     location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+    }
+
+    # Reverb / Pusher-compatible websocket endpoint
+    location ~ ^/(app|apps)/ {
+        proxy_http_version 1.1;
+
+        # Upgrade to websocket
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+
+        # Pass through original host & client info
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port $server_port;
+
+        # Timeouts for long-lived connections
+        proxy_read_timeout 600s;
+        proxy_send_timeout 600s;
+
+        # Reverb upstream
+        proxy_pass http://127.0.0.1:8082;
+    }
+}</code></pre>
+
+  <h4 class="mt-2 font-semibold text-green-600 text-xl mb-2">.env updates for Reverb</h4>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>REVERB_APP_ID=203062
+REVERB_APP_KEY=aemlp5pobjolzjbfktj7
+REVERB_APP_SECRET=trnmutuqpfgrfuhb2drb
+REVERB_HOST=your_domain.com
+REVERB_PORT=443
+REVERB_SCHEME=https
+
+REVERB_SERVER_HOST=127.0.0.1
+REVERB_SERVER_PORT=8082
+
+VITE_REVERB_APP_KEY="${REVERB_APP_KEY}"
+VITE_REVERB_HOST="${REVERB_HOST}"
+VITE_REVERB_PORT="${REVERB_PORT}"
+VITE_REVERB_SCHEME="${REVERB_SCHEME}"</code></pre>
+
+  <h4 class="mt-2 font-semibold text-green-600 text-xl mb-2">Allow ports (UFW)</h4>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>sudo ufw allow 8081/tcp
+sudo ufw allow 8082/tcp</code></pre>
+
+  <h4 class="mt-2 font-semibold text-green-600 text-xl mb-2">Build & start Reverb</h4>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>npm run build
+
+php artisan config:clear
+php artisan cache:clear
+
+php artisan reverb:start --debug
+php artisan queue:work</code></pre>
+  <p class="text-slate-600 text-sm mt-1">If your browser Network tab shows WebSocket status <code>101</code>, it’s working.</p>
+
+  <h4 class="mt-2 font-semibold text-green-600 text-xl mb-2">Supervisor – Reverb & Queue</h4>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code># Install Supervisor
+sudo apt-get install -y supervisor
+
+# Reverb
+sudo nano /etc/supervisor/conf.d/laravel-reverb.conf</code></pre> <br>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>[program:laravel-reverb]
+directory=/var/www/free-space
+command=/usr/bin/php artisan reverb:start --host=127.0.0.1 --port=8082
+user=www-data
+
+autostart=true
+autorestart=true
+startsecs=5
+startretries=3
+stopsignal=QUIT
+stopasgroup=true
+killasgroup=true
+stopwaitsecs=20
+
+stdout_logfile=/var/log/supervisor/laravel-reverb.out.log
+stderr_logfile=/var/log/supervisor/laravel-reverb.err.log
+stdout_logfile_maxbytes=20MB
+stderr_logfile_maxbytes=20MB
+stdout_logfile_backups=5
+stderr_logfile_backups=5
+
+environment=APP_ENV="production"</code></pre> <br>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code># Queue worker
+sudo nano /etc/supervisor/conf.d/laravel-queue.conf</code></pre> <br>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>[program:laravel-queue]
+directory=/var/www/free-space
+command=/usr/bin/php artisan queue:work --tries=3 --timeout=120 --sleep=3 --backoff=5 --max-time=3600
+user=www-data
+
+process_name=%(program_name)s
+numprocs=1
+
+autostart=true
+autorestart=true
+startsecs=5
+startretries=3
+stopsignal=TERM
+stopasgroup=true
+killasgroup=true
+stopwaitsecs=60
+
+redirect_stderr=true
+stdout_logfile=/var/log/supervisor/laravel-queue.out.log
+stderr_logfile=/var/log/supervisor/laravel-queue.err.log
+stdout_logfile_maxbytes=20MB
+stderr_logfile_maxbytes=20MB
+stdout_logfile_backups=5
+stderr_logfile_backups=5
+
+environment=APP_ENV="production"</code></pre> <br>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl restart laravel-reverb
+sudo supervisorctl restart laravel-queue
+sudo supervisorctl status</code></pre>
+
+  <h4 class="mt-2 font-semibold text-green-600 text-xl mb-2">Cron job (Laravel scheduler)</h4>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>sudo crontab -e
+
+* * * * * /usr/bin/php /var/www/free-space/artisan schedule:run >> /var/www/free-space/storage/logs/cron.log 2>&1
+
+# helpful debug
+cd /var/www/free-space
+sudo -u www-data php artisan config:clear
+sudo -u www-data php artisan cache:clear
+tail -f storage/logs/laravel.log storage/logs/cron.log</code></pre>
+
+<h3 class="font-semibold mt-4 font-bold text-green-600 text-xl mb-2">Video: Deploy on Server (Step-by-step)</h3>
+                <div class="rounded-xl overflow-hidden border border-slate-200">
+                     <li>Deploy on VPS Server</li>
+                    <iframe class="w-full" style="aspect-ratio: 16 / 9" src="https://www.youtube.com/embed/HKaGqeGKGP0?si=WQgs1Z07C5eViUuj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <p class="text-sm text-slate-600 mt-2">
+                    Direct link:
+                    <a href="https://youtu.be/HKaGqeGKGP0?si=WQgs1Z07C5eViUuj" target="_blank" class="text-blue-600 underline">
+                    https://youtu.be/HKaGqeGKGP0?si=WQgs1Z07C5eViUuj
+                    </a>
+                </p>
+</section>
+
+            
+
+
+
+
+
+
+
+            <!-- Docker -->
+<section id="docker"
+  class="scroll-mt-24 md:scroll-mt-6 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+
+  <h2 class="text-3xl font-bold text-orange-600">Run with Docker [Local]</h2>
+  
+  <h3 class="mt-4 font-bold text-green-600 text-lg">Quick Steps</h3>
+  <ol class="list-decimal ml-6 space-y-2 text-slate-700">
+    <li><strong>Go to <code>./free-space</code></strong> </li>
+    <li><strong>Copy all files and folders.</strong> </li>
+    <li><strong>Go to dockerize-k8s-free-space folder.</strong> </li>
+    <li><strong>Then go app folder and paste this all file</strong> </li>
+     <li><strong>Start containers</strong> (Development):
+      <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto mt-2"><code>docker compose down -v
+docker compose up --build</code></pre>
+    </li>
+    <li>Open the app (default from our sample compose): <code class="bg-slate-100 px-1 rounded">http://localhost:8000</code></li>
+  </ol>
+
+  <h3 class="mt-6 font-bold text-green-600 text-lg">Production </h3>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code># Bring down old stack
+docker compose down -v    
+docker compose -f docker-compose.prod.yml down -v
+
+# Build & start
+docker compose -f docker-compose.prod.yml up  --build
+
+# First-time only (run once, then keep running under Supervisor/Queue if configured)
+docker compose -f docker-compose.prod.yml exec app php artisan migrate --force</code></pre>
+
+  <div class="mt-6">
+    <h4 class="font-semibold">Useful commands</h4>
+    <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto mt-2"><code># Logs
+docker compose logs -f app
+docker compose logs -f webserver
+
+# Tinker / Artisan
+docker compose exec -it app php bash
+
+# Stop everything
+docker compose down -v</code></pre>
+  </div>
+
+  <div class="rounded-xl overflow-hidden border border-slate-200 mt-6">
+    <h4 class="font-bold text-green-600 text-md p-3">Video: Run on Docker</h4>
+    <iframe
+      class="w-full"
+      style="aspect-ratio: 16 / 9"
+      src="https://www.youtube.com/embed/SEpYCXJzoLM?rel=0"
+      title="Run FreeSpace on Docker"
+      frameborder="0"
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+  </div>
+
+  <p class="text-sm text-slate-600 mt-2">
+    Direct link:
+    <a href="https://youtu.be/SEpYCXJzoLM?si=QKac32OLnYUEtVO7" target="_blank" class="text-blue-600 underline">
+      https://youtu.be/SEpYCXJzoLM
+    </a>
+  </p>
+</section>
+
+
+
+
+           
+            <!-- Kubernetes -->
+<section id="k8s"
+  class="scroll-mt-24 md:scroll-mt-6 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+
+  <h2 class="text-2xl font-bold text-orange-600">Run on Kubernetes (Local)</h2>
+  <p class="text-slate-600">
+    These steps assume you already have a local cluster (e.g., <em>kind</em> or <em>minikube</em>),
+    an Ingress Controller, and <code class="bg-slate-100 px-1 rounded">kubectl</code> configured.
+  </p>
+
+  <h3 class="mt-4 font-bold text-green-600 text-lg">Kind Environment Make</h3>
+  <li><strong>Open a terminal in</strong> <code class="bg-slate-100 px-1 rounded">./dockerize-k8s-free-space/kind-setup-for-local</code></li>
+  <li><strong>Create Kind Cluster</strong> run this script file:
+      <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto mt-2"><code>./recreate-cluster.sh</code></pre>
+  </li>
+  <li><strong>Check Kind Cluster</strong> 
+      <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto mt-2"><code>kubectl get nodes</code></pre>
+  </li>
+
+  <h3 class="mt-4 font-bold text-green-600 text-lg">Host File Modification</h3>
+  <li><strong>Go to</strong> <code class="bg-slate-100 px-1 rounded">C:\Windows\System32\drivers\etc\</code></li>
+  <li><strong>Open hosts file</strong> added this line:
+      <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto mt-2"><code>127.0.0.1    free-space.com</code></pre>
+  </li>
+  
+
+  <h3 class="mt-4 font-bold text-green-600 text-lg">Quick Steps</h3>
+  <ol class="list-decimal ml-6 space-y-2 text-slate-700">
+    <li><strong>Open a terminal in</strong> <code class="bg-slate-100 px-1 rounded">./dockerize-k8s-free-space/k8s</code></li>
+    <li><strong>Create the namespace</strong>:
+      <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto mt-2"><code>kubectl apply -f .\namespace.yaml</code></pre>
+    </li>
+    <li><strong>Certificates (local)</strong>:
+      if you see a file named <code class="bg-slate-100 px-1 rounded">cert-manager-for-server.yaml</code>,
+      move/rename it out of this folder (it's for real servers). Keep the local manifests only.</li>
+    <li><strong>Apply all manifests</strong>:
+      <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto mt-2"><code>kubectl apply -f .</code></pre>
+      <small class="text-slate-500 block mt-1">Note: if CRDs are applied first, a second run of the same command is harmless and resolves ordering.</small>
+    </li>
+  </ol>
+
+  <h3 class="mt-6 font-bold text-green-600 text-lg">Trust local TLS certificate (Windows)</h3>
+  <ol class="list-decimal ml-6 space-y-2 text-slate-700">
+    <li class="font-medium text-blue-700">From Git Bash, export the root CA:</li>
+  </ol>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>kubectl -n freespace get secret freespace-root-ca \
+  -o jsonpath='{.data.tls\.crt}' | base64 -d > ~/Downloads/freespace-local-root.cer</code></pre>
+
+  <ol start="2" class="list-decimal ml-6 space-y-2 text-slate-700">
+    <li class="font-medium text-blue-700">Open Windows PowerShell as Administrator and run:</li>
+  </ol>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>powershell.exe -Command 'certutil -addstore -f Root "$env:USERPROFILE\Downloads\freespace-local-root.cer"'</code></pre>
+
+  <h3 class="mt-6 font-bold text-green-600 text-lg">Verify resources</h3>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code># Pods / Services
+kubectl -n freespace get all
+
+# Certificates
+kubectl -n freespace get issuer,certificate
+kubectl -n freespace describe certificate freespace-cert
+kubectl -n freespace get secret freespace-app-tls -o yaml
+
+# Ingress
+kubectl -n freespace get ingress freespace-ingress
+kubectl -n freespace describe ingress freespace-ingress</code></pre>
+
+<h3 class="mt-6 font-bold text-green-600 text-lg">Restart app</h3>
+<pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>kubectl rollout restart -n freespace deployment.apps/freespace-app
+
+kubectl rollout status -n freespace deployment.apps/freespace-app</pre>
+
+
+  <h3 class="mt-6 font-bold text-green-600 text-lg">Open the app</h3>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>https://freespace.com</code></pre>
+
+  <div class="rounded-xl overflow-hidden border border-slate-200 mt-6">
+    <h4 class="font-bold text-green-600 text-md p-3">Video: Run on Kubernetes</h4>
+    <iframe
+      class="w-full"
+      style="aspect-ratio: 16 / 9"
+      src="https://www.youtube.com/embed/SEpYCXJzoLM?rel=0"
+      title="Run FreeSpace on Kubernetes"
+      frameborder="0"
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+  </div>
+
+  <p class="text-sm text-slate-600 mt-2">
+    Direct link:
+    <a href="https://youtu.be/SEpYCXJzoLM?si=QKac32OLnYUEtVO7" target="_blank" class="text-blue-600 underline">
+      https://youtu.be/SEpYCXJzoLM
+    </a>
+  </p>
+</section>
+
+
+
+
+
+<br><br>
+
+
+            <!-- Run on local -->
+             <section id="local" class="scroll-mt-24 md:scroll-mt-6 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+  <h2 class="text-3xl font-bold text-orange-600">Run Locally</h2>
+
+  <h3 class="mt-4 font-bold text-green-600 text-lg">Quick steps</h3>
+  <ol class="list-decimal ml-6 space-y-2 text-slate-700">
+    <li><strong>Go to the project</strong>: <code class="bg-slate-100 px-1 rounded">./free-space</code> and open it in
+      VS Code (or any IDE).</li>
+    <li><strong>Create a database</strong> named <code class="bg-slate-100 px-1 rounded">free_space</code>.</li>
+    
+    <li><strong>Environment & deps</strong></li>
+  </ol>
+
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code># from ./free-space
+cp .env.example .env
+# set DB in .env:
+# DB_DATABASE=free_space
+# DB_USERNAME=your_user
+# DB_PASSWORD=your_pass
+
+composer install
+npm install
+
+php artisan key:generate
+php artisan storage:link</code></pre>
+
+  <ol start="4" class="list-decimal ml-6 space-y-2 text-slate-700">
+    <li><strong>Prepare data</strong> – choose ONE:</li>
+  </ol>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code># Option A) Import SQL (if you have it)
+# Import free_space.sql into your free_space DB using phpMyAdmin or MySQL client
+
+# Option B) Run migrations/seeders
+php artisan migrate --seed</code></pre>
+
+  <ol start="5" class="list-decimal ml-6 space-y-2 text-slate-700">
+    <li><strong>Start services (use separate terminals)</strong></li>
+  </ol>
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code># 1) PHP dev server
+php artisan serve
+
+# 2) Vite (frontend) — for local development
+npm run dev
+# (or build once for a static bundle)
+# npm run build
+
+# 3) Queue worker
+php artisan queue:work
+
+# 4) Reverb (WebSocket)
+php artisan reverb:start --host=127.0.0.1 --port=8081</code></pre>
+
+  <p class="text-sm text-slate-600 mt-2">
+    If you use Reverb locally, set these in <code>.env</code> (and reload Vite if needed):
+    <code class="bg-slate-100 px-1 rounded">REVERB_SERVER_HOST=127.0.0.1</code>,
+    <code class="bg-slate-100 px-1 rounded">REVERB_SERVER_PORT=8081</code>,
+    <code class="bg-slate-100 px-1 rounded">REVERB_SCHEME=http</code>,
+    plus the matching <code class="bg-slate-100 px-1 rounded">VITE_REVERB_*</code> variables.
+  </p>
+
+  <div class="rounded-xl overflow-hidden border border-slate-200 mt-6">
+    <h4 class="font-bold text-green-600 text-md p-3">Video: Run on Local</h4>
+    <iframe
+      class="w-full"
+      style="aspect-ratio: 16 / 9"
+      src="https://www.youtube.com/embed/SEpYCXJzoLM?rel=0"
+      title="Run FreeSpace locally"
+      frameborder="0"
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+  </div>
+
+  <p class="text-sm text-slate-600 mt-2">
+    Direct link:
+    <a href="https://youtu.be/SEpYCXJzoLM?si=QKac32OLnYUEtVO7" target="_blank" class="text-blue-600 underline">
+      https://youtu.be/SEpYCXJzoLM
+    </a>
+  </p>
+</section>
+
+
+
+<br><br>
+            <!-- Credentials -->
+            <section id="credentials"
+                class="scroll-mt-24 md:scroll-mt-6 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+
+                <h2 class="text-2xl font-bold">Demo Accounts</h2>
+                <p class="text-slate-600">
+                    Use these demo credentials for testing. Unless noted otherwise, the password is
+                    <code class="bg-slate-100 px-1 rounded">password</code> (all lowercase).
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-4 mt-4">
+                    <!-- Admin -->
+                    <div class="border border-slate-200 rounded-xl p-4">
+                        <h3 class="font-semibold mb-2">Admin</h3>
+                        <p class="text-slate-700">
+                            Email: <code class="bg-slate-100 px-1 rounded">admin@example.com</code><br>
+                            Password: <code class="bg-slate-100 px-1 rounded">password</code>
+                        </p>
+                    </div>
+
+                    <!-- Super Admin -->
+                    <div class="border border-slate-200 rounded-xl p-4">
+                        <h3 class="font-semibold mb-2">Super Admin</h3>
+                        <p class="text-slate-700">
+                            Email: <code class="bg-slate-100 px-1 rounded">superadmin@example.com</code><br>
+                            Password: <code class="bg-slate-100 px-1 rounded">password</code>
+                        </p>
+                    </div>
+
+                    <!-- Shop Owners 1–20 -->
+                    <div class="border border-slate-200 rounded-xl p-4">
+                        <h3 class="font-semibold mb-2">Shop Owners (1–20)</h3>
+                        <p class="text-slate-600 text-sm mb-2">Pattern: <code
+                                class="bg-slate-100 px-1 rounded">shopowner{1..20}@example.com</code></p>
+                        <details class="rounded-lg border border-slate-200 p-3 bg-slate-50">
+                            <summary class="cursor-pointer font-medium text-slate-700">Show full list</summary>
+                            <pre class="mt-2 bg-slate-900 text-blue-100 rounded-lg p-3 overflow-x-auto text-sm"><code>
+shopowner1@example.com  / password
+shopowner2@example.com  / password
+shopowner3@example.com  / password
+shopowner4@example.com  / password
+shopowner5@example.com  / password
+shopowner6@example.com  / password
+shopowner7@example.com  / password
+shopowner8@example.com  / password
+shopowner9@example.com  / password
+shopowner10@example.com / password
+shopowner11@example.com / password
+shopowner12@example.com / password
+shopowner13@example.com / password
+shopowner14@example.com / password
+shopowner15@example.com / password
+shopowner16@example.com / password
+shopowner17@example.com / password
+shopowner18@example.com / password
+shopowner19@example.com / password
+shopowner20@example.com / password
+                                </code></pre>
+                        </details>
+                    </div>
+
+                    <!-- Customers 1–30 -->
+                    <div class="border border-slate-200 rounded-xl p-4">
+                        <h3 class="font-semibold mb-2">Customers (1–30)</h3>
+                        <p class="text-slate-600 text-sm mb-2">Pattern: <code
+                                class="bg-slate-100 px-1 rounded">customer{1..30}@example.com</code></p>
+                        <details class="rounded-lg border border-slate-200 p-3 bg-slate-50">
+                            <summary class="cursor-pointer font-medium text-slate-700">Show full list</summary>
+                            <pre class="mt-2 bg-slate-900 text-blue-100 rounded-lg p-3 overflow-x-auto text-sm"><code>
+customer1@example.com   / password
+customer2@example.com   / password
+customer3@example.com   / password
+customer4@example.com   / password
+customer5@example.com   / password
+customer6@example.com   / password
+customer7@example.com   / password
+customer8@example.com   / password
+customer9@example.com   / password
+customer10@example.com  / password
+customer11@example.com  / password
+customer12@example.com  / password
+customer13@example.com  / password
+customer14@example.com  / password
+customer15@example.com  / password
+customer16@example.com  / password
+customer17@example.com  / password
+customer18@example.com  / password
+customer19@example.com  / password
+customer20@example.com  / password
+customer21@example.com  / password
+customer22@example.com  / password
+customer23@example.com  / password
+customer24@example.com  / password
+customer25@example.com  / password
+customer26@example.com  / password
+customer27@example.com  / password
+customer28@example.com  / password
+customer29@example.com  / password
+customer30@example.com  / password
+                                </code></pre>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="mt-4 text-sm text-slate-600 bg-slate-50 border border-slate-200 rounded-xl p-3">
+                    <strong>Note:</strong> These accounts are for demo/testing only. Replace them with real credentials
+                    before going live.
+                </div>
+            </section>
+
+
+            <footer class="text-center text-xs text-slate-500 pb-10">
+                © <span id="year"></span> FreeSpace
+            </footer>
+
+            <a class="topbtn bg-zinc-600 text-white" href="#intro">↑ Top</a>
+        </main>
+    </div>
+
+    <script>
+  // Scrollspy active state (robust)
+  const navLinks = Array.from(document.querySelectorAll('.navlink'));
+  const ACTIVE = ['bg-blue-50', 'text-blue-700', 'border-l-4', 'border-blue-600'];
+
+  function setActive(id) {
+    navLinks.forEach(a => a.classList.remove(...ACTIVE));
+    const link = navLinks.find(a => a.getAttribute('href') === '#' + id);
+    if (link) link.classList.add(...ACTIVE);
+  }
+
+  // Include all real sections + the div#dev-practices
+  const sections = [
+    ...document.querySelectorAll('main section'),
+    document.querySelector('#dev-practices')
+  ].filter(Boolean);
+
+  // Immediately highlight on click (so anchor জাম্পের সঙ্গে সঙ্গে সঠিক দেখায়)
+  document.querySelectorAll('.navlink').forEach(a => {
+    a.addEventListener('click', () => {
+      const id = a.getAttribute('href').slice(1);
+      setActive(id);
+      if (window.innerWidth < 768) {
+        const closeBtn = document.getElementById('closeBtn');
+        closeBtn?.click();
+      }
+    });
+  });
+
+  // Track which section is MOST visible
+  const ratios = Object.fromEntries(sections.map(s => [s.id, 0]));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      ratios[entry.target.id] = entry.isIntersecting ? entry.intersectionRatio : 0;
+    });
+    // pick the section with highest visibility
+    let bestId = null, best = 0;
+    for (const [id, r] of Object.entries(ratios)) {
+      if (r > best) { best = r; bestId = id; }
+    }
+    if (bestId) setActive(bestId);
+  }, {
+    // center-biased window; tweak top value if হেডার থাকে
+    rootMargin: '-20% 0px -60% 0px',
+    threshold: [0, 0.25, 0.5, 0.75, 1]
+  });
+
+  sections.forEach(s => io.observe(s));
+</script>
+
+</body>
+
+</html>
