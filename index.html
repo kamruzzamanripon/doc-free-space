@@ -724,7 +724,7 @@ php artisan route:clear</code></pre>
 
   <!-- 12. Migrate/seed -->
   <h3 class="mt-4 font-bold text-green-600 text-xl mb-2">Migrate database</h3>
-  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>php artisan migrate
+  <pre class="bg-slate-900 text-blue-100 rounded-xl p-4 overflow-x-auto"><code>php artisan migrate --seed --seeder=AppSettingSeeder
 # or
 php artisan migrate:refresh --seed</code></pre>
 
@@ -961,7 +961,7 @@ docker compose -f docker-compose.prod.yml down -v
 docker compose -f docker-compose.prod.yml up  --build
 
 # First-time only (run once, then keep running under Supervisor/Queue if configured)
-docker compose -f docker-compose.prod.yml exec app php artisan migrate --force</code></pre>
+docker compose -f docker-compose.prod.yml exec app php artisan migrate --seed --seeder=AppSettingSeeder --force</code></pre>
 
   <div class="mt-6">
     <h4 class="font-semibold">Useful commands</h4>
@@ -1129,7 +1129,7 @@ php artisan key:generate
 php artisan storage:link
 # optional
 php artisan config:cache
-php artisan migrate --force   # only if you didn't import SQL</code></pre>
+php artisan migrate --seed --seeder=AppSettingSeeder   # only if you didn't import SQL</code></pre>
       <p class="text-slate-600 text-sm mt-2">If no Terminal is available, generate the <code>APP_KEY</code> locally and paste into <code>.env</code>.</p>
     </li>
   </ol>
@@ -1182,6 +1182,8 @@ php artisan storage:link</code></pre>
 # Import free_space.sql into your free_space DB using phpMyAdmin or MySQL client
 
 # Option B) Run migrations/seeders
+php artisan migrate --seed --seeder=AppSettingSeeder
+Or
 php artisan migrate --seed</code></pre>
 
   <ol start="5" class="list-decimal ml-6 space-y-2 text-slate-700">
